@@ -13,6 +13,14 @@ public:
     }
 };
 
+void (*funcReturn(const char* message))(char*){
+    if(message == "print"){
+        return print;
+    } else {
+        return nullptr;
+    }
+}
+
 int main(){
     void (*myFuncPtr)(char *);
     myFuncPtr = &print;   // or myFuncPtr = print;
@@ -22,6 +30,11 @@ int main(){
    
     myFuncPtr = myClass::entityPrint;
     myFuncPtr((char*)"This is message from static print");
+
+    myFuncPtr = nullptr;
+    myFuncPtr = funcReturn("print");
+    myFuncPtr((char*)"This Function is return from funcReturn");
+
     return 0;
 }
 
@@ -35,4 +48,5 @@ void myPrint(void (*print)(char*), char * message)
     std::cout << "This is myPrint\n";
     print(message);
 }
+
 
