@@ -23,12 +23,12 @@ public:
     }
 
     //Default copy constructor => just shallow copy
-    // String(const String &other):
-    //     mSize(other.mSize),
-    //     mBuffer(other.mBuffer)
-    // {
-    //     std::cout << "Shallow copy constructor\n";
-    // }
+    String(const String &other):
+        mSize(other.mSize),
+        mBuffer(other.mBuffer)
+    {
+        std::cout << "Shallow copy constructor\n";
+    }
 
     unsigned int size(){
         return mSize;
