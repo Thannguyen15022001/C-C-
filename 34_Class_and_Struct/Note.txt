@@ -1,0 +1,69 @@
+1. Class basis
+- In class default access modifier is "private"
+- In struct and union default access modifier is "public"
+Example:
+struct Vector
+{
+    int x;
+    int y;
+    int z;
+};
+// are equivalent to
+class Vector
+{
+public:
+    int x;
+    int y;
+    int z;
+};
+
+2. Inheritances
+- Default inheritances in class is "private" but in struct is "public"
+- It's even possible to have a class derive from a struct (or vice versa). Default inheritances is controlled by chird.
+Example:
+    Class A inheritance Struct B -> default private
+    Struct B inheritance Class A -> default public
+- (Public) interitance was frequently said to model an "IS-A" relationship.
+Note: public inheritance should only be used when/if an instance of the derived class can be substituted for an instance of the base class under any possible circumstance (and still make sense)
+Example: Ví dụ trong thực tế chúng ra có hình vuông là một (IS A) hình chữ nhật đặt biệt với chiều dài bằng chiều rộng. Vậy nên trong code để class hình vuông kế thừa class hình chữ nhật
+        là không hợp lý. Và trong class hình chữ nhật có 2 method là setweight và sethight. Khi con trỏ hình chữ nhật trỏ đến hình vuông để call sethight và setweight cho hình vuông đó
+        thì nó trở nên vô nghĩa bởi vì hình vuông wieght = hight.
+        - Một ví dụ khác như là đà điều là một loài chim. Nhưng chúng ta không thể làm class đà điểu kế thừa class chim. Trong class chim có method fly() và class đà điểu kế thừa class chim
+        thì class đà điểu cũng sở hữu method fly(). điều này ko đúng bởi vì đà điều không biết bay.
+=> Khi tạo 1 class chúng ta nên dựa theo hành vi chứ ko nên dựa trên thuộc tính. nhưng khi model data base(web) ta nên dựa vào thuộc tính chứ ko phải hành vi
+
+BAD EXAMPLE:
+
+class Bird(){
+public:()
+    void fly();
+}
+
+class duck: public Bird{
+    // Vit là 1 loài chim có thế bay ngắn
+}
+
+class Ostrich : public Bird{
+    // Chim đà điều là 1 loài chim nhưng ko biết bay 
+}
+
+GOOD EXAMPLE:
+
+class Birb{
+
+}
+
+class flyingBird : public Birb {
+    void fly();
+}
+
+class duck : public flyingBird{
+
+}
+
+class Ostrich : public Bird{
+
+}
+
+
+

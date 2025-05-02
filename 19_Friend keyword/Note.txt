@@ -1,0 +1,16 @@
+1. Friend function
+- Well-designed classes encapsulate their functionality, hiding their implementation while providing a clean,
+    documented interface. This allows redesign or change so long as the interface is unchanged.
+- In a more complex scenario, multiple classes that rely on each others' implementation details may be required.
+    Friend classes and functions allow these peers access to each others' details, without compromising the
+    encapsulation and information hiding of the documented interface
+- Friend declarations are not inherited
+
+2. Friend method
+- Methods of class may declared as friends as well as functions
+
+3. Friend class
+- A whole class may be declared as friend. Friend class declaration means that any member of the friend may access
+private and protected members of the declaring class:
+- Friend class declaration is not reflexive. If classes need private access in both directions, both of them need friend
+declarations.
