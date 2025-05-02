@@ -13,6 +13,13 @@ struct S
         std::cout <<"Copy S(" << mX << ")\n";
     }
 
+    //Move constructor
+    S(S&& other)
+    {
+        mX = std::move(other.mX);
+        std::cout <<"Move S(" << mX << ")\n";
+    }
+    
     ~S(){
         std::cout <<"Destructor\n";
     }
@@ -41,12 +48,21 @@ S makeDoubleValue(int value){
     return s;
 }
 
+void Func(S arg){
+    std::cout << arg.mX << std::endl;
+}
+
 int main(){
     S myValue = makeValue_NRVO(100);
-    return 0;
 
+    Func(myValue);  //Copy constructor
+    Func(S(1000));  //Move constructor due to rvalue and create temporary variable -> using flag -fno-elide-contructors
+    return 0;
 }
 
 
 //$  g++ -O0 -fno-elide-constructors -o main main.cpp     -fno-elide-constructors: disable elision copy
 //Chỉ áp dụng cho kiểu dữ liệu class và ko áp dụng cho kiểu dữ liệu nguyên thủy như int, char, float .. (tùy compiler)
+
+//Elide thường xảy ra khi copy từ 1 pvalue(temporary value) sang lvalue và điều này chỉ 
+//xảy ra trong ngữ cảnh direct initialization hoặc return, và sẽ không xảy ra khi copy từ lvalue sang lvalue
